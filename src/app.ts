@@ -9,12 +9,12 @@ const app = express();
 //CHANNEL_TOKEN アクセストークン
 
 const config: line.ClientConfig = {
-    channelAccessToken: process.env.CHANNEL_TOKEN,
-    channelSecret: process.env.CHANNEL_SECRET
+    channelAccessToken: process.env.CHANNEL_TOKEN!,
+    channelSecret: process.env.CHANNEL_SECRET!
 };
 
 const middlewareConfig : line.MiddlewareConfig = {
-    channelSecret : process.env.CHANNEL_SECRET
+    channelSecret : process.env.CHANNEL_SECRET!
 }
 
 const client = new line.Client(config);

@@ -1,5 +1,5 @@
-const line = require('@line/bot-sdk');
-const express = require("express");
+import * as line from '@line/bot-sdk';
+import express from "express";
 const app = express();
 
 // Dev用のConfig
@@ -8,10 +8,14 @@ const app = express();
 //CHANNEL_SECRET channel secret
 //CHANNEL_TOKEN アクセストークン
 
-const config = {
-    channelSecret: process.env.CHANNEL_SECRET,
-    channelAccessToken: process.env.CHANNEL_TOKEN
+const config: line.ClientConfig = {
+    channelAccessToken: process.env.CHANNEL_TOKEN,
+    channelSecret: process.env.CHANNEL_SECRET
 };
+
+const middlewareConfig : line.MiddlewareConfig = {
+    channelSecret : process.env.CHANNEL_SECRET
+}
 
 const client = new line.Client(config);
 
@@ -20,13 +24,13 @@ app.listen(port, () => {
     console.log(`listening on ${port}`);
 });
 
-app.post('/callback', line.middleware(config), (req, res) => {
+app.post('/callback', line.middleware(middlewareConfig), (req, res) => {
     Promise
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result));
 });
 
-function handleEvent(event) {
+function handleEvent(event:line.WebhookEvent) {
     if (event.type !== 'message' || event.message.type !== 'text') {
       return Promise.resolve(null);
     }

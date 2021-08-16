@@ -24,10 +24,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const line = __importStar(require("@line/bot-sdk"));
 const express_1 = __importDefault(require("express"));
+const utils_1 = require("./utils");
 const app = express_1.default();
 require('dotenv').config();
-// Dev用のConfig
-//const config = require("../.config.json");
 //CHANNEL_SECRET channel secret
 //CHANNEL_TOKEN アクセストークン
 const config = {
@@ -44,6 +43,7 @@ app.listen(port, () => {
 });
 app.get('/', (req, res) => {
     res.send('hello world');
+    console.log(utils_1.UrlParse(process.env.QR_SITE, "アイウエオ"));
 });
 app.post('/callback', line.middleware(middlewareConfig), (req, res) => {
     Promise
@@ -54,8 +54,9 @@ function handleEvent(event) {
     if (event.type !== 'message' || event.message.type !== 'text') {
         return Promise.resolve(null);
     }
+    let returnMsg = "こちらがQR Codeです \n" + utils_1.UrlParse(process.env.QR_SITE, event.message.text);
     return client.replyMessage(event.replyToken, {
         type: 'text',
-        text: event.message.text
+        text: returnMsg
     });
 }

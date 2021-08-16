@@ -1,5 +1,6 @@
 import * as line from '@line/bot-sdk';
 import express from "express";
+import {UrlParse} from "./utils";
 const app = express();
 require('dotenv').config()
 
@@ -36,10 +37,12 @@ function handleEvent(event:line.WebhookEvent) {
     if (event.type !== 'message' || event.message.type !== 'text') {
       return Promise.resolve(null);
     }
+
+    let returnMsg: string = "こちらがQR Codeです \n \n" + UrlParse(process.env.QR_SITE!, event.message.text)
   
     return client.replyMessage(event.replyToken, {
       type: 'text',
-      text: event.message.text
+      text: returnMsg
     });
   }
 

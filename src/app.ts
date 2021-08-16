@@ -3,15 +3,15 @@ const express = require("express");
 const app = express();
 
 // Dev用のConfig
-const config = require("../.config.json");
+//const config = require("../.config.json");
 
 //CHANNEL_SECRET channel secret
 //CHANNEL_TOKEN アクセストークン
 
-// const config = {
-//     channelSecret: process.env.CHANNEL_SECRET,
-//     channelAccessToken: process.env.CHANNEL_TOKEN
-// };
+const config = {
+    channelSecret: process.env.CHANNEL_SECRET,
+    channelAccessToken: process.env.CHANNEL_TOKEN
+};
 
 const client = new line.Client(config);
 

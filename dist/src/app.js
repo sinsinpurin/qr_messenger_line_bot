@@ -25,6 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const line = __importStar(require("@line/bot-sdk"));
 const express_1 = __importDefault(require("express"));
 const app = express_1.default();
+require('dotenv').config();
 // Dev用のConfig
 //const config = require("../.config.json");
 //CHANNEL_SECRET channel secret

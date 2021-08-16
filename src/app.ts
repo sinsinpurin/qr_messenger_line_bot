@@ -1,9 +1,7 @@
 import * as line from '@line/bot-sdk';
 import express from "express";
 const app = express();
-
-// Dev用のConfig
-//const config = require("../.config.json");
+require('dotenv').config()
 
 //CHANNEL_SECRET channel secret
 //CHANNEL_TOKEN アクセストークン

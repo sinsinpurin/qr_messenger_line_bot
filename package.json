@@ -2,12 +2,13 @@
   "name": "qr_messenger_line_bot",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.ts",
+  "main": "dist/src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.ts",
+    "start": "node dist/src/app.js",
     "build": "tsc",
-    "dev": "nodemon  --exec ts-node src/app.ts"
+    "dev": "nodemon  --exec ts-node src/app.ts",
+    "serve": "yarn build & yarn start"
   },
   "keywords": [],
   "author": "",

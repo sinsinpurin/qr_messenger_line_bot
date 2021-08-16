@@ -24,6 +24,10 @@ app.listen(port, () => {
     console.log(`listening on ${port}`);
 });
 
+app.get('/', (req, res) => {
+    res.send('hello world')
+  })
+
 app.post('/callback', line.middleware(middlewareConfig), (req, res) => {
     Promise
     .all(req.body.events.map(handleEvent))
